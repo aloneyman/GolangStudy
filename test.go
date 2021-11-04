@@ -16,12 +16,25 @@ func add_id(use *user) { // 显然 *user 和 user 是有关系但是不同种类
 	use.id += 10
 }
 
+func (use *user) add_id() { // 将user 和 add_id 函数进行绑定  *use是add_id方法的接收者
+	use.id += use.id
+}
+
+func change_user(use *user) {
+	//use = &user{"yyc", 1}
+	use.name = "yyc"
+}
+
 func main() {
 	chh := &user{ // 传递地址
 		name: "chh",
 		id:   1,
 	}
-	fmt.Println(chh)
-	add_id(chh)
+	//fmt.Println(chh)
+	//add_id(chh)
+	//fmt.Println(chh)
+	//change_user(chh)
+	//fmt.Println(chh)
+	chh.add_id()
 	fmt.Println(chh)
 }
