@@ -21,8 +21,8 @@ func (use *user) add_id() { // 将user 和 add_id 函数进行绑定  *use是add
 }
 
 func change_user(use *user) {
-	//use = &user{"yyc", 1}
-	use.name = "yyc"
+	//use = &user{"yyc", 1} // 不用取地址符
+	use.name = "yyc" //是use拷贝过来的时候就是拷贝的指针
 }
 
 func main() {
