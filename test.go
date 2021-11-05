@@ -12,6 +12,12 @@ type user struct {
 	id   int
 }
 
+func NewUser(name string, id int) user { // 构造函数
+	return user{
+		name, id,
+	}
+}
+
 func add_id(use *user) { // 显然 *user 和 user 是有关系但是不同种类类型的变量
 	use.id += 10
 }
@@ -25,7 +31,24 @@ func change_user(use *user) {
 	use.name = "yyc" //是use拷贝过来的时候就是拷贝的指针
 }
 
+type xueyuan struct {
+	name string
+}
+
+type school struct {
+	xueyuan
+	name string
+}
+
+func NewSchool() school {
+	return school{
+		xueyuan: xueyuan{"cs"},
+		name:    "swust",
+	}
+}
+
 func main() {
+
 	chh := &user{ // 传递地址
 		name: "chh",
 		id:   1,
@@ -35,6 +58,16 @@ func main() {
 	//fmt.Println(chh)
 	//change_user(chh)
 	//fmt.Println(chh)
-	chh.add_id()
+	zrx := NewUser("zrx", 3)
+	//chh.add_id()
 	fmt.Println(chh)
+	fmt.Println(zrx)
+
+	lyh := new(user)
+	lyh.name = "lyh"
+	lyh.id = 4
+	fmt.Println(lyh)
+
+	swust := NewSchool()
+	fmt.Println(swust)
 }
