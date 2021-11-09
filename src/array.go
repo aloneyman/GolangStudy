@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 //在go中，数组是固定大小的。
 func main() {
@@ -12,7 +15,12 @@ func main() {
 	//}
 
 	score := make([]int, 0, 10)
-	add_score := []int{1, 2, 3, 4}
-	score = append(score, add_score...)
+	for i, arg := range os.Args[1:] {
+		fmt.Printf("{} {}", i, arg)
+	}
+	score = score[0:5]
+	score = append(score, 5)
+	//add_score := []int{1, 2, 3, 4}
+	//score = append(score, add_score...)
 	fmt.Println(score)
 }
