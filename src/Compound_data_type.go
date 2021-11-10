@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 //type Currency int
 //
@@ -50,7 +52,65 @@ func emptyString(str []string) []string {
 	}
 	return str[:i]
 }
+
+type Tree struct {
+	val   int
+	left  *Tree
+	right *Tree
+}
+
+func add(root *Tree, val int) *Tree {
+	if root == nil {
+		root = new(Tree)
+		root.val = val
+		return root
+	}
+	if root.val >= val {
+		add(root.left, val)
+	} else {
+		add(root.right, val)
+	}
+	return root
+}
+func appendValues(arr []int, root *Tree) {
+	if root == nil {
+		return
+	}
+	appendValues(arr, root.left)
+	arr = append(arr, root.val)
+	appendValues(arr, root.right)
+}
+func sortValue(arr []int) {
+	var root *Tree
+	for _, val := range arr {
+		root = add(root, val)
+	}
+	appendValues(arr[:0], root)
+}
+
+// map 对应 seen make(map[string]struct{})
+// 查找的时候 if _,ok := map[key] 两个返回值，第一个是对应的val值，ok是在哈希表里面能否找到对应的键值
+// 结构体嵌入和匿名成员
+type Point struct {
+	X, Y int
+}
+
+type Circle struct {
+	Center Point
+	Radius int
+}
+
+type Wheel struct {
+	Circle Circle
+	Spokes int
+}
+
+/*
+	Go语言有一个特性让我们只声明一个成员对应的数据类型而不指名成员的名字；
+	这类成员就叫匿名成员。匿名成员的数据类型必须是命名的类型或指向一个命名的类型的指针。
+*/
 func main() {
+
 	//arr := [...]int{1,2,3,4}
 	//fmt.Println(arr)
 	//arr := [...]int{5:-1} // 定一个了一个容量为6的数组最后一个数是-1
